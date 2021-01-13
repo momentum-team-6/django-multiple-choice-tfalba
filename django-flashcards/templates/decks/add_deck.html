@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class='flex'>
+  <p class='deck-button'>Create New Deck</p>
+</div>
+
+<div class="form-div">
+  <form  action="{% url 'add-deck' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div>
+      <button class='button-function' type="submit">Add Deck</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

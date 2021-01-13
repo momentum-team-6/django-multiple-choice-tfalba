@@ -1,0 +1,17 @@
+
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class='bottom-section'>
+  <p class='search-heading'>Search Actors</p>
+  <form id="movie-form-3">
+    <input class='actor-search' type='text' placeholder='Enter Actor' id='actor-search'></input>
+    <button id="submit-button-3" type='Submit'>Submit</button> 
+  </form>
+</div>
+
+<div id='display-2' data-deck-pk={{ deck.pk }}></div>
+
+{% endblock %}
