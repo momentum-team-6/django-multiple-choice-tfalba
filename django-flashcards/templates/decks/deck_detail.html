@@ -3,39 +3,14 @@
 
 {% block content %}
 
+{% include 'decks/includes/deck_detail_include.html' %}
+
+{% if deck.user == request.user %}
 <div>
-  <div>
-    <a href="{% url 'start-round' deck_pk=deck.pk %}">Play Round</a>
-  </div>
-  <ul class='flex'>
-    {% for card in deck.cards.all %}
-    <li>
-      <div class='card-holder flip-card' data-card-pk={{card.pk}}>
-        <div class='flip-card-inner'>
-          <div class='flip-card-front'>
-            {% if card.question_image_upload  %}
-            <img class='card-image' src="{{ card.question_image_upload.url }}" alt="movie star image" style="width:100%; height:100%;">
-
-            {% elif card.question_image %}
-            <img class='card-image' src="{{ card.question_image }}" alt="movie star image" style="width:100%; height:100%;">  
-            {% else %}
-            <p style='margin: 0; padding:0;'>{{ card.question_text }}</p>
-            {% endif %}
-          </div>
-          <div class='flip-card-back'>
-            {{ card.answer }}
-          </div>
-        </div>
-      </div>
-      <a href="{{ card.get_absolute_url }}">Card Detail</a>
-    </li>
-    {% endfor %}
-  </ul>
-  <div>
-    <a href="{% url 'add-card' deck_pk=deck.pk %}">Add a Card</a>
-    <a href="{% url 'search-add' deck_pk=deck.pk %}">Search for Cards</a>
-
-  </div>
+  <a class='label-button' href="{% url 'add-card' deck_pk=deck.pk %}">Add a Card</a>
+  <a class='label-button' href="{% url 'search-add' deck_pk=deck.pk %}">Search for Cards</a>
+  <a class='label-button' href="{% url 'add-card' deck_pk=deck.pk %}">Edit Deck</a>
+  
 </div>
-
+{% endif %}
 {% endblock %}

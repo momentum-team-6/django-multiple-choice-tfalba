@@ -8,17 +8,24 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Acme&family=Dosis:wght@200;300;400;500;600;700;800&family=Inconsolata:wght@200;300;400;500;600;700;800;900&family=Indie+Flower&display=swap" rel="stylesheet">
+  <link  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,800;1,100&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/846acebbe7.js" crossorigin="anonymous"></script>
   <script src="{% static 'js/search.js' %}" defer></script>
-  <!-- <script src="{% static 'js/main.js' %}" defer></script> -->
+  <script src="{% static 'js/main.js' %}" defer></script>
 </head>
 
 <body>
-  <div class='header'>
-    <h1><a class="header-nav" href="{% url 'home' %}">FLASHCARDS</a></h1>
+  <div class='header flex-col-center'>
+    <h1><a class="header-nav" href="{% url 'home' %}">ENHANCE YOUR MIND</a></h1>
+    <div class='flex'>
+      <div class='flex'><a href="{% url 'home' %}" {% if request.path == '/' %} class='question-button highlight-button' {% else %} class= 'question-button' {% endif %}">View Decks</a></div>
+      <div class='flex'><a href="{% url 'add-deck' %}" {% if request.path == '/decks/' %} class='question-button highlight-button' {% else %} class= 'question-button' {% endif %}">Add a Deck</a></div>
+    </div>
   </div>
 
-  <div class = 'content-block'>
+  <div class = 'content-block flex-col'>
     {% block content %}
     {% endblock %}
   </div>

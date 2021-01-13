@@ -2,11 +2,11 @@
 
 {% block content %}
 <div class='flex'>
-  <p class='deck-button'>Create New Card for {{ deck.name }}</p>
+  <div class='flex question-button'>Create a New Card for {{ deck.name }}</div>
 </div>
+<div class="mb20 mt10 flex form-div">
 
-<div class="form-div">
-  <form  action="{% url 'add-card' deck_pk=deck.pk %}" method="POST">
+  <form  action="{% url 'add-card' deck_pk=deck.pk %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <div>

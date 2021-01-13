@@ -4,11 +4,13 @@
 
 {% block content %}
 
-<div class='bottom-section'>
-  <p class='search-heading'>Search Actors</p>
+<div class='flex-col bottom-section'>
+  <div class='flex'>
+  <p class='search-heading question-button'>Search Actors to add to {{ deck.name }} </p>
+  </div>
   <form id="movie-form-3">
-    <input class='actor-search' type='text' placeholder='Enter Actor' id='actor-search'></input>
-    <button id="submit-button-3" type='Submit'>Submit</button> 
+    <input class='actor-search mt10' type='text' placeholder='Enter Actor' id='actor-search'></input>
+    <button class='label-button' id="submit-button-3" type='Submit'>Submit</button> 
   </form>
 </div>
 

@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 
-
 {% block content %}
-
-
+<div class='flex-col-center'>
 <div class='flex'>
   <div class='card-holder flip-card'>
     <div class='flip-card-inner'>
@@ -23,11 +21,12 @@
       </div>
     </div>
   </div>
-    <div class='ml20 flex'><a href="{% url 'random-card' deck_pk=card.deck.pk %}"><i class='fs50 fas fa-arrow-right'></i></a></div>
+    <!-- <div class='ml20 flex'><a href="{% url 'random-card' deck_pk=card.deck.pk %}"><i class='fs50 fas fa-arrow-right'></i></a></div> -->
 </div>
 <div class='flex' data-card-pk={{ card.pk }}>
-  <a href="{% url 'random-card' deck_pk=card.deck.pk %}" class='mark-answered'>Mark Answered</a>
-  <a href="#" class='ml20 return-to-pile'>Return to Pile</a>
+  <a href="{% url 'random-card' deck_pk=card.deck.pk %}" class='mt10 label-button mark-answered'>Got it!</a>
+  <a href="#" class='ml20 mt10 return-to-pile label-button'>Keep Reviewing</a>
+</div>
 </div>
 
 

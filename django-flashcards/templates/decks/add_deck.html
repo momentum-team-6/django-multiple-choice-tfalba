@@ -1,17 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class='flex'>
-  <p class='deck-button'>Create New Deck</p>
-</div>
 
-<div class="form-div">
-  <form  action="{% url 'add-deck' %}" method="POST" enctype="multipart/form-data">
+<div class='flex'>
+  <div class='flex question-button'>Create a New Deck</div>
+</div>
+<div class="mb20 mt10 flex form-div">
+  {% load widget_tweaks %}
+  <form class = 'input-field' action="{% url 'add-deck' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
+    <!-- <div class='add-deck'>
+      <label class='form-control'>Enter the name of your deck</label>
+      {% render_field form.name class='form-control' placeholder='Name of Deck' type='text' label='Enter name of deck'%}
+    </div>
+    <div class='add-deck'>
+      <label class='form-control'>Enter a link for your deck cover photo (optional): </label>
+      {% render_field form.deck_cover class='form-control' placeholder='Enter link to image' type='text' %}
+    </div>
+    <div class='add-deck'>
+      <label class='form-control'>Select a file to upload for your deck cover photo (optional): </label>
+      {% render_field form.deck_cover_upload class='form-control' placeholder='Upload an image file' type='file' %}
+    </div>
+    <div class='add-deck'>
+      <label class='form-control'>Select to keep this deck private: </label>
+      {% render_field form.is_private class='form-control' placeholder='Select to keep private' type='checkbox' %}
+    </div> -->
     <div>
       <button class='button-function' type="submit">Add Deck</button>
     </div>
   </form>
 </div>
+
+{% include 'decks/includes/deck_list_include.html' %}
+
+
 {% endblock %}

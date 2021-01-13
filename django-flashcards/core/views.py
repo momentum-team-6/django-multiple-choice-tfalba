@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
-# Create your views here.
-from django.urls import reverse
+from django.db.models import Q
 from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from .models import User, Deck, Card
 from .forms import DeckForm, CardForm
 import json
@@ -11,7 +11,7 @@ import requests
 
 @login_required
 def index(request):
-  decks = Deck.objects.all()
+  decks= Deck.objects.filter(Q(user=request.user) | Q(is_private=False))
   return render(request, 'decks/index.html', {"decks": decks})
 
 @login_required
@@ -27,6 +27,7 @@ def deck_detail(request, deck_pk):
 
 @login_required
 def add_deck(request):
+  decks= Deck.objects.filter(Q(user=request.user) | Q(is_private=False))
   if request.method == 'GET':
     form = DeckForm()
   else:
@@ -38,7 +39,7 @@ def add_deck(request):
       new_deck.save()
 
       return redirect(to='home')
-  return render(request, "decks/add_deck.html", {"form": form })
+  return render(request, "decks/add_deck.html", {"form": form, "decks":decks })
 
 @login_required
 def card_detail(request, pk):
@@ -48,13 +49,17 @@ def card_detail(request, pk):
 # add separate view for add card from search -- this goes into the fetch request
 @login_required
 def ajax_add_card(request, deck_pk):
-  answer = json.load(request)['answer']
-  question_image = json.load(request)['question_image']
-
+  #breakpoint()
+  response = json.load(request)
+  #breakpoint()
+  answer = response['answer']
+  question_image = response['question_image']
+  #breakpoint()
   
-  new_card = Card.objects.create(question_image=question_image, answer=answer)
-  #data = {'add': 'new-card'}
-  return redirect(to='deck-detail', deck_pk=deck_pk)
+  new_card = Card.objects.create(question_image=question_image, answer=answer, deck_id=deck_pk)
+  data = {'status': 'OK'}
+  return JsonResponse(data)
+  #return redirect(to='deck-detail', deck_pk=deck_pk)
 
 
 @login_required
@@ -64,7 +69,7 @@ def add_card(request, deck_pk):
   if request.method == 'GET':
     form = CardForm()
   else:
-    form = CardForm(data=request.POST)
+    form = CardForm(request.POST, request.FILES)
     if form.is_valid():
       new_card = form.save(commit=False)
       new_card.deck = deck
@@ -76,7 +81,6 @@ def add_card(request, deck_pk):
 @login_required
 def random_card(request, deck_pk):
   deck = get_object_or_404(Deck, pk=deck_pk)
-#  cards = Card.objects.filter(deck=deck)
   cards = Card.objects.filter(answered='False', deck=deck)
   card = cards.order_by("?").first()
   return redirect(to='card-detail', pk=card.id)

@@ -1,0 +1,55 @@
+<div>
+  <div class='flex-col'>
+    <div class='flex'>
+      <div class='flex question-button'>My Decks</div>
+    </div>
+    
+      <ul class='flex animate__animated animate__fadeInRight'>
+        {% for deck in decks %}
+        {% if deck.user == request.user %}
+        
+        <li>
+          <div class='card-holder'>
+          {% if deck.deck_cover_upload %}
+          <a href="{% url 'deck-detail' deck_pk=deck.pk %}"><img class='flip-card' src="{{ deck.deck_cover_upload.url }}"></a>
+          {% elif deck.deck_cover %}
+          <a href="{% url 'deck-detail' deck_pk=deck.pk %}"><img class='flip-card' src="{{ deck.deck_cover }}"></a>
+          {% else %}
+          <a class='cover-text' href="{% url 'deck-detail' deck_pk=deck.pk %}"><p class ='flip-card' style='margin: 0; padding:0;'>{{ deck.name }}</p></a>
+          {% endif %}      
+          </div>  
+
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+      {% if request.path == '/' %}
+      <div class='flex'>
+        <a class='label-button' href="{% url 'add-deck' %}">Add a Deck</a>
+      </div>
+      {% endif %}
+
+  </div>
+  {% if request.path == '/' %}
+  <div class='public-decks flex-col'>
+    <div class='flex'>
+      <div class='flex question-button'>Public Decks</div>
+    </div>
+    <ul class='flex animate__animated animate__fadeInLeft'>
+      {% for deck in decks %}
+      {% if deck.user != request.user %}
+      <li>
+        {% if deck.deck_cover_upload %}
+        <a href="{% url 'deck-detail' deck_pk=deck.pk %}"><img class='flip-card' src="{{ deck.deck_cover_upload.url }}"></a>
+        {% elif deck.deck_cover %}
+        <a href="{% url 'deck-detail' deck_pk=deck.pk %}"><img class='flip-card' src="{{ deck.deck_cover }}"></a>
+        {% else %}
+        <a class='cover-text' href="{% url 'deck-detail' deck_pk=deck.pk %}"><p class='flip-card' style='margin: 0; padding:0;'>{{ deck.name }}</p></a>
+        {% endif %}        
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</div>

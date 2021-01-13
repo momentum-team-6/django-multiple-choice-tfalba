@@ -16,6 +16,7 @@ django-registration-redux = "*"
 pillow = "*"
 django-random-queryset = "*"
 requests = "*"
+django-widget-tweaks = "*"
 
 [requires]
 python_version = "3.8"

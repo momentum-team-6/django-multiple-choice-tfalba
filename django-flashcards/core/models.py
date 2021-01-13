@@ -12,9 +12,13 @@ class Deck(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='decks')
     deck_cover = models.CharField(max_length=100, null=True, blank=True)
     deck_cover_upload = models.ImageField(upload_to = 'images/', blank=True, null=True)
+    is_private = models.BooleanField(default=False)
     
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('deck-detail', args=[str(self.id)])
 
 class Card(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular card across whole library')

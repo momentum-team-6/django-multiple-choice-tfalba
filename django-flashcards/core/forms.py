@@ -8,10 +8,9 @@ class DeckForm(forms.ModelForm):
       'name',
       'deck_cover',
       'deck_cover_upload',
+      'is_private',
     ]
-
-    # name = forms.CharField()
-    # deck_cover = forms.Textarea()
+    
 
 class CardForm(forms.ModelForm):
   class Meta:
@@ -23,7 +22,4 @@ class CardForm(forms.ModelForm):
       'answer',
     ]
 
-    # question_image = forms.CharField()
-    # question_text = forms.CharField()
-    # answer = forms.CharField()
 

@@ -1,22 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-  <ul class='flex'>
-    {% for deck in decks %}
-    <li>
-      {% if deck.deck_cover_upload %}
-      <a href="{% url 'deck-detail' deck_pk=deck.pk %}"><img class='flip-card' src="{{ deck.deck_cover_upload.url }}"></a>
-      {% elif deck.deck_cover %}
-      <a href="{% url 'deck-detail' deck_pk=deck.pk %}"><img class='flip-card' src="{{ deck.deck_cover }}"></a>
+{% include 'decks/includes/deck_list_include.html' %}
 
-      {% else %}
-      <a class='cover-text' href="{% url 'deck-detail' deck_pk=deck.pk %}"><p class='flip-card' style='margin: 0; padding:0;'>{{ deck.name }}</p></a>
-      {% endif %}        
-    </li>
-    {% endfor %}
-  </ul>
-</div>
-<a href="{% url 'add-deck' %}">Add a Deck</a>
 
 {% endblock %}
