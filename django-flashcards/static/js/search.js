@@ -13,25 +13,18 @@ if (actorSearchForm != null) {
   actorSearchForm.addEventListener('submit', function (event) {
     event.preventDefault()
     const searchTerm = document.getElementById('actor-search').value
-    console.log(searchTerm)
     searchActors(searchTerm)
   })
 
-  // This will allow the choice to submit the card and run createMovie
   searchResultDisplay.addEventListener('click', function (event) {
     if (event.target.classList.contains('add-card')) {
-      console.log('I clicked add-card')
-      createMovie(event.target.parentElement)
-      // write a function instead of createMovie that will populate
+      createCard(event.target.parentElement)
       event.target.parentElement.parentElement.classList.add('hide-me')
-      console.log(event.target.parentElement.previousElementSibling.firstElementChild.id)
     }
   })
 
   function searchActors (searchTerm) {
-    console.log('running searchMovies')
     searchResultDisplay.innerHTML = ''
-    // change the fetch url to be the actor prefix
     fetch(dbActorPrefix + encodeURI(searchTerm) + '&append_to_response=known_for')
       .then(res => res.json())
       .then(data => {
@@ -50,11 +43,7 @@ if (actorSearchForm != null) {
   let deckPk = searchResultDisplay.dataset.deckPk
   let URL = `/decks/cards/ajax_add/${deckPk}/`
 
-  function createMovie (obj) {
-    console.log(obj.innerText)
-    console.log(obj.previousElementSibling.firstElementChild.id)
-    console.log(URL)
-    console.log(deckPk)
+  function createCard (obj) {
     fetch(URL, {
       method: 'POST',
       headers: {
@@ -71,8 +60,6 @@ if (actorSearchForm != null) {
       .then(data => {
         console.log(data)
         window.location.replace(`/decks/${deckPk}/`)
-        // what goes in here instead of getMovies??
-        // getMovies()
       })
   }
 
@@ -81,7 +68,6 @@ if (actorSearchForm != null) {
   /* ------------------------------------------------------------------------------------------------------------------ */
 
   function showActorResults (actor, display) {
-
     const actorMain = document.createElement('div')
     actorMain.classList.add('search-card')
     const actorName = document.createElement('div')

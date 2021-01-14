@@ -5,6 +5,7 @@
   <div class='flex'>
   
     <a class="question-button {% include 'decks/includes/color_choice_border.html' %}" href="{% url 'start-round' deck_pk=deck.pk %}">Play Round</a>
+    <a class="question-button {% include 'decks/includes/color_choice_border.html' %}" href="{% url 'home' %}"><i style='font-size: 25px;' class='fa-home fas'></i></a>
   </div>
   <ul class='flex animate__animated animate__fadeInRight'>
     {% for card in deck.cards.all %}

@@ -22,10 +22,10 @@ class User(AbstractUser):
     pass
 
 class Deck(models.Model):
-    name = models.CharField(max_length=100, help_text='Enter a name to identify your deck')
+    name = models.CharField(max_length=100, help_text='Enter a name to identify your deck. (Required)')
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='decks')
-    deck_cover = models.CharField(max_length=100, null=True, blank=True)
-    deck_cover_upload = models.ImageField(upload_to = 'images/', blank=True, null=True)
+    deck_cover = models.CharField(max_length=100, null=True, blank=True, help_text='Enter a url for a deck cover image. (Optioinal)')
+    deck_cover_upload = models.ImageField(upload_to = 'images/', blank=True, null=True, help_text='Upload an image for deck cover photo (Optional)')
     is_private = models.BooleanField(default=False)
     
     def __str__(self):
@@ -38,10 +38,10 @@ class Card(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular card across whole library')
 
     deck = models.ForeignKey('Deck', on_delete=models.CASCADE, related_name='cards')
-    question_image = models.CharField(max_length=1000, null=True, blank=True)
-    question_image_upload = models.ImageField(upload_to = 'images/', blank=True, null=True)
-    question_text = models.CharField(max_length=1000, null=True, blank=True)
-    answer = models.CharField(max_length=255, help_text='This should be the name of the image')
+    question_image = models.CharField(max_length=1000, null=True, blank=True, help_text='Enter a url for question image. (Optioinal)')
+    question_image_upload = models.ImageField(upload_to = 'images/', blank=True, null=True, help_text='Upload an image for card question. (Optional)')
+    question_text = models.CharField(max_length=1000, null=True, blank=True, help_text='Enter your question in text form. (Optional, Default if no image)')
+    answer = models.CharField(max_length=255, help_text='Enter the answer to the question. (Required)')
     answered = models.BooleanField(default=False)
     return_to_pile = models.BooleanField(default=False)
     objects = RandomManager()

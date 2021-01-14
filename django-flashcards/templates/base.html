@@ -55,8 +55,11 @@
     {% block content %}
     {% endblock %}
   </div>
-  <div class='ml50 mr50 pb50 pl50 flex-col footer'>
-    <div class='mt30'><a class="button-function {% include 'decks/includes/color_choice_border.html' %}"href="/accounts/logout/">Logout</a></div>
+  <div class='ml50  mr50 pb50 pl50 flex-col footer'>
+    <div class='flex'>
+      <div><a class="button-function {% include 'decks/includes/color_choice_border.html' %}"href="/">Login</a></div>
+      <div><a class="button-function {% include 'decks/includes/color_choice_border.html' %}"href="/accounts/logout/">Logout</a></div>
+    </div>
     <div class='mt10 fs20' >Logged in as {{ request.user }}.</div>
     <div data-user-pk={{ request.user.pk }} class='flex fs20'>Select Color Pallet: 
       <div class='color-choice blue' data-color-pk='2'>Blue</div>
