@@ -19,6 +19,8 @@ const csrftoken = getCookie('csrftoken');
 
 let correctAnswer = document.querySelector('.mark-answered')
 
+let keepGoing = document.querySelector('.return-to-deck')
+
 if (correctAnswer != null) {
   let cardPk = correctAnswer.parentElement.dataset.cardPk
   let URL = `/decks/cards/${cardPk}/mark_answered`
@@ -41,4 +43,57 @@ if (correctAnswer != null) {
       // debugger
     })
   })
+}
+
+if (keepGoing != null) {
+  let cardPk = keepGoing.parentElement.dataset.cardPk
+  let URL3 = `/decks/cards/${cardPk}/mark_keep_going`
+  
+  keepGoing.addEventListener('click', e => {
+    console.log("I'm here")
+    console.log(cardPk)
+    console.log(URL)
+    fetch(URL3, {
+      headers:{
+        'Accept': 'application/json/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then(data => {
+      console.log(data)
+      // debugger
+    })
+  })
+}
+
+let colorChoices = document.querySelectorAll('.color-choice')
+for (const colorChoice of colorChoices) {
+  if (colorChoice != null) {
+    
+
+    colorChoice.addEventListener('click', e => {
+      let colorPk = colorChoice.dataset.colorPk
+      let userPk = colorChoice.parentElement.dataset.userPk
+      let URL2 = `/decks/${userPk}/color_choice/${colorPk}`
+      
+      console.log("I'm choosing a color")
+      fetch(URL2, {
+        headers:{
+          'Accept': 'application/json/json',
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+      })
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+
+        console.log(data)
+        location.reload()
+      })
+    })
+  }
 }

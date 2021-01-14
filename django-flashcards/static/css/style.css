@@ -7,18 +7,36 @@
 body {
   background-color: black;
   color:black;
-  color: white;
+  color: #d7d5d5;
   display: flex;
   flex-direction: column;
-  background-image: url("../images/pexels-adrien-olichon-2387819.jpg");
+  /* background-image: url("../images/pexels-adrien-olichon-2387819.jpg"); */
   background-size: cover;
+}
 
+.search-form {
+  position: absolute;
+  top: 50px;
 }
 .header {
   color: white;
-  height: 220px;
+  height: 160px;
   align-items: center;
 }
+.footer {
+  background-color: rgba(16, 16, 16, 0.842);
+}
+.color-choice {
+  font-size: 20px;
+  width: 100px;
+  margin-left: 10px;
+  margin-right: 5px;
+  border-radius: 10px;
+  border: solid 2px black;
+  text-align: center;
+  color: black;
+}
+
 a {
   color:  white;
 }
@@ -26,7 +44,7 @@ a {
   padding-top:20px;
   display: flex;
   justify-content: center;
-  font-size: 50px;
+  font-size: 60px;
   margin: 0;
   margin-top: 20px;
   font-weight: 300;
@@ -38,8 +56,6 @@ a {
   color: white;
 }
 .content-block {
-  background-color:white;
-  background-color:#ffffff2b;
   background-color: #101010d9;
   margin-left: 50px;
   margin-right: 50px;
@@ -50,21 +66,24 @@ a {
 
 }
 
-/* .content-block div {
-  margin-left: 50px;
-  margin-right: 50px;
-} */
-
 .content-block a {
-  /* color: black; */
   text-decoration: none;
 }
 
 ul {
   list-style: none;
 }
+
+i {
+  font-size: 25px;
+  padding-top: 5px;
+}
+
 li {
-  padding-right: 10px;
+  /* margin: 20px; */
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 4px solid black;
 }
 
 .flex-se {
@@ -76,9 +95,6 @@ li {
 .flex {
   display: flex;
   flex-wrap: wrap; 
-  /* padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px; */
 }
 
 .flex-col {
@@ -95,7 +111,15 @@ li {
 .ml20 {
   margin-left: 20px;
 }
-
+.ml50 {
+  margin-left: 50px;
+}
+.ml100 {
+  margin-left: 100px;
+}
+.fs20 {
+  font-size: 20px;
+}
 .fs50 {
   font-size: 50px;
 }
@@ -103,20 +127,40 @@ li {
 .mt10 {
   margin-top: 10px;
 }
+.mt30 {
+  margin-top: 30px;
+}
+.mt50 {
+  margin-top: 50px;
+}
 
 .mb20 {
   margin-bottom:20px;
 }
 
-.cover-text {
-  font-size: 30px;
+.mb50 {
+  margin-bottom: 50px;
 }
+.mr50 {
+  margin-right: 50px;
+}
+.pb50 {
+  padding-bottom: 50px;
+}
+.pl50 {
+  padding-left: 50px;
+}
+
+.cover-text {
+  font-size: 25px;
+}
+
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-card {
   background-color: transparent;
-  width: 200px;
+  width: 220px;
   height: 300px;
-  border: 4px solid #000000;
+  /* border: 4px solid #000000; */
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -147,7 +191,7 @@ li {
   height: 100%;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
-  font-size: 30px;
+  font-size: 25px;
   display:flex;
   justify-content: center;
   align-items: center;
@@ -162,7 +206,7 @@ li {
 
 /* Style the back side */
 .flip-card-back {
-  background-color: dodgerblue;
+  /* background-color: dodgerblue; */
   color: white;
   transform: rotateY(180deg);
 }
@@ -225,17 +269,53 @@ input {
   padding: 5px; 
   color:white; 
   background-color:black; 
-  border: solid 3px rgb(116, 115, 115); 
-  border: solid 3px rgb(220, 159, 8);
+  
   text-decoration: none;
   margin-top:0;
   margin-bottom:0;
   margin-right: 4px;
 }
 
-/* .question-button a {
-  color: white;
-} */
+.color-border-mustard {
+  border: solid 3px rgb(220, 159, 8);
+}
+.color-border-blue {
+  border: solid 3px dodgerblue;
+}
+.color-border-green {
+  border: solid 3px rgb(2, 115, 21);
+}
+.color-border-grey {
+  border: solid 3px #757575;
+}
+.color-background-blue, .blue {
+  background-color: #1e90ffbd;
+}
+.color-background-mustard, .yellow {
+  background-color: #d9ab0deb;
+}
+.color-background-green, .green {
+  background-color: #4cdf64c4;
+}
+.color-background-grey, .silver {
+  background-color: #928f8fcf;
+}
+
+.color-font-mustard {
+  color: solid 3px rgb(220, 159, 8);
+}
+.color-font-blue {
+  color: solid 3px dodgerblue;
+}
+.color-font-green {
+  color: solid 3px rgb(2, 115, 21);
+}
+.color-font-grey {
+  color: #757575;
+}
+
+
+
 
 .highlight-button {
   background-color: white;
@@ -247,7 +327,7 @@ input {
 .button-function {
   font-size: 18px; 
   background-color:black; 
-  border: solid 2px rgb(220, 159, 8);
+  /* border: solid 2px rgb(220, 159, 8); */
   border-radius: 10px; 
   color: white; 
   padding: 4px; 
@@ -261,12 +341,40 @@ input {
   border-radius: 10px; 
   padding: 4px; 
   color:black; 
-  background-color: rgb(220, 159, 8);
+  /* background-color: rgb(220, 159, 8); */
   text-decoration: none;
   margin-right: 5px;
   margin-left: 5px;
 }
 
+.header-button {
+  border-radius: 10px; 
+  padding: 4px; 
+  color:black; 
+  /* background-color: rgb(220, 159, 8); */
+  text-decoration: none;
+  margin-right: 5px;
+  margin-left: 5px;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 600;
+  
+}
+
 .public-decks {
-  margin-top: 30px;
+  margin-top: 20px;
+}
+
+.title-button {
+  font-weight: 400;
+  font-size: 18px;
+    /* border-radius: 10px; */
+  padding: 4px;
+  color: black;
+  /* background-color: #25292b; */
+  text-decoration: none;
+  /* margin-right: 5px; */
+  /* margin-left: 5px; */
+  /* border: solid 4px black; */
+  text-align: center;
 }

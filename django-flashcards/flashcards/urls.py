@@ -32,7 +32,12 @@ urlpatterns = [
     path('decks/cards/ajax_add/<int:deck_pk>/', views.ajax_add_card, name='ajax-add-card'),
     path('decks/cards/random_card/<int:deck_pk>/', views.random_card, name='random-card'),
     path('decks/cards/<uuid:pk>/mark_answered', views.mark_correct, name='mark-answered'),
+    path('decks/cards/<uuid:pk>/mark_keep_going', views.mark_keep_going, name='mark-keep-going'),
     path('decks/cards/start_round/<int:deck_pk>/', views.start_round, name='start-round'),
+    path('decks/<int:user_pk>/color_choice/<int:color_pk>', views.change_color, name='color-choice'),
+    path('decks/<int:deck_pk>/edit/', views.edit_deck, name='edit-deck'),
+    path('decks/<int:deck_pk>/delete', views.delete_deck, name='delete-deck'),
+    path('decks/cards/<uuid:pk>/delete/', views.delete_card, name='delete-card'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

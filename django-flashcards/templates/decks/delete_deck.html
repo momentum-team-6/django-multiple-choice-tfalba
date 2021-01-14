@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex">
+  <div class="flex question-button {% include 'decks/includes/color_choice_border.html' %}">Delete Deck</div>
+</div>
+  <div class='form-div'>
+  <form action="{% url 'delete-deck' deck_pk=deck.pk %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p><em>Are you sure you want to delete? </em> <br>{{ deck.name }} </p>
+    <div class="flex">
+      <button class="label-button {% include 'decks/includes/color_choice_background.html' %}" type="submit">Delete Deck</button><br />
+      <a class="label-button {% include 'decks/includes/color_choice_background.html' %}" href="{% url 'home' %}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

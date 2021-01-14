@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class='flex'>
+  <div class="flex question-button {% include 'decks/includes/color_choice_border.html' %}">Edit Deck</div>
+</div>
+<div class="mb20 mt10 flex form-div">
+  <form class = 'input-field' action="{% url 'edit-deck' deck_pk=deck.pk %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div>
+      <button class="label-button {% include 'decks/includes/color_choice_background.html' %}" type="submit">Update Deck</button>
+    </div>
+  </form>
+</div>
+{% include 'decks/includes/deck_detail_include.html' %}
+
+
+{% endblock %}

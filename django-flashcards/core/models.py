@@ -5,6 +5,20 @@ import uuid
 from django.urls import reverse
 
 class User(AbstractUser):
+    COLORS = (
+        ('1', 'Mustard'),
+        ('2', 'Blue'),
+        ('3', 'Red'),
+        ('4', 'Green'),
+    )
+
+    color = models.CharField(
+        max_length=1,
+        choices=COLORS,
+        blank=True,
+        default='1',
+        help_text='Color Choice',
+    )
     pass
 
 class Deck(models.Model):

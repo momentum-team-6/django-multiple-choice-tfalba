@@ -1,0 +1,5 @@
+{% if request.user.color == '1' %} color-background-mustard 
+{% elif request.user.color == '4' %} color-background-green 
+{% elif request.user.color == '3' %} color-background-grey
+{% else %} color-background-blue
+{% endif %}

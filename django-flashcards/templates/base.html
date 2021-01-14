@@ -17,17 +17,53 @@
 </head>
 
 <body>
+  {% if request.user.color == '4' %}
+  <style>
+    body {
+      background-image: url("{% static 'images/pexels-jesse-zheng-732548.jpg' %}") ;
+    }
+    .header h1 a {
+      color: black;
+    }
+
+  </style>
+  {% elif request.user.color == '2' %}
+  <style>
+    body {
+      background-image: url("{% static 'images/pexels-skitterphoto-366280.jpg' %}") ;
+    }
+  </style>
+  {% else %}
+  <style>
+    body {
+      background-image: url("{% static 'images/pexels-adrien-olichon-2387819.jpg' %}") ;
+
+    }
+  </style>
+  {% endif %}
+
   <div class='header flex-col-center'>
-    <h1><a class="header-nav" href="{% url 'home' %}">ENHANCE YOUR MIND</a></h1>
-    <div class='flex'>
-      <div class='flex'><a href="{% url 'home' %}" {% if request.path == '/' %} class='question-button highlight-button' {% else %} class= 'question-button' {% endif %}">View Decks</a></div>
-      <div class='flex'><a href="{% url 'add-deck' %}" {% if request.path == '/decks/' %} class='question-button highlight-button' {% else %} class= 'question-button' {% endif %}">Add a Deck</a></div>
-    </div>
+    <h1><a class="header-nav" href="{% url 'home' %}">ENHANCE YOUR MIND<i style='padding-left: 10px; font-size: 40px;' class='fa-home fas'></i></a></h1>
+    <!-- <div class='flex'>
+      <div class='flex'><a href="{% url 'home' %}" class="question-button {% include 'decks/includes/color_choice_border.html' %}">View Decks</a></div>
+      <div class='flex'><a href="{% url 'add-deck' %}" class="question-button {% include 'decks/includes/color_choice_border.html' %}">Add a Deck</a></div>
+    </div> -->
   </div>
+
 
   <div class = 'content-block flex-col'>
     {% block content %}
     {% endblock %}
   </div>
+  <div class='ml50 mr50 pb50 pl50 flex-col footer'>
+    <div class='mt30'><a class="button-function {% include 'decks/includes/color_choice_border.html' %}"href="/accounts/logout/">Logout</a></div>
+    <div class='mt10 fs20' >Logged in as {{ request.user }}.</div>
+    <div data-user-pk={{ request.user.pk }} class='flex fs20'>Select Color Pallet: 
+      <div class='color-choice blue' data-color-pk='2'>Blue</div>
+      <div class='color-choice yellow' data-color-pk='1'>Yellow</div>
+      <div class='color-choice silver' data-color-pk='3'>Silver</div>
+      <div class='color-choice green' data-color-pk='4'>Green</div>
+    </div>
+</div>
 </body>
 </html>

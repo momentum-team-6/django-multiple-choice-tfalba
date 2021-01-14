@@ -5,12 +5,5 @@
 
 {% include 'decks/includes/deck_detail_include.html' %}
 
-{% if deck.user == request.user %}
-<div>
-  <a class='label-button' href="{% url 'add-card' deck_pk=deck.pk %}">Add a Card</a>
-  <a class='label-button' href="{% url 'search-add' deck_pk=deck.pk %}">Search for Cards</a>
-  <a class='label-button' href="{% url 'add-card' deck_pk=deck.pk %}">Edit Deck</a>
-  
-</div>
-{% endif %}
+
 {% endblock %}

@@ -1,22 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="mb20 flex header-button {% include 'decks/includes/color_choice_background.html' %}">{{ card.deck.name }}</div>
+
 <div class='flex-col-center'>
 <div class='flex'>
   <div class='card-holder flip-card'>
     <div class='flip-card-inner'>
       <div class='flip-card-front'>
         {% if card.question_image_upload  %}
-        <img class='card-image' src="{{ card.question_image_upload.url }}" alt="movie star image" style="width:100%; height:100%;">
+        <img class='card-image' src="{{ card.question_image_upload.url }}" alt="{{ card.question_text }}" style="width:100%; height:100%;">
 
         {% elif card.question_image %}
-        <img class='card-image' src="{{ card.question_image }}" alt="movie star image" style="width:100%; height:100%;">  
+        <img class='card-image' src="{{ card.question_image }}" alt="{{ card.question_text }}" style="width:100%; height:100%;">  
         {% else %}
         <p style='margin: 0; padding:0;'>{{ card.question_text }}</p>
         {% endif %}
 
       </div>
-      <div class='flip-card-back flex' style='align-items:center;'>
+      <div class="flex flip-card-back {% include 'decks/includes/color_choice_background.html' %}" style='align-items:center;'>
         <p>{{ card.answer }}</p>
       </div>
     </div>
@@ -24,8 +26,8 @@
     <!-- <div class='ml20 flex'><a href="{% url 'random-card' deck_pk=card.deck.pk %}"><i class='fs50 fas fa-arrow-right'></i></a></div> -->
 </div>
 <div class='flex' data-card-pk={{ card.pk }}>
-  <a href="{% url 'random-card' deck_pk=card.deck.pk %}" class='mt10 label-button mark-answered'>Got it!</a>
-  <a href="#" class='ml20 mt10 return-to-pile label-button'>Keep Reviewing</a>
+  <a href="{% url 'random-card' deck_pk=card.deck.pk %}" class="mt10 label-button mark-answered {% include 'decks/includes/color_choice_background.html' %}">Got it!</a>
+  <a href="{% url 'random-card' deck_pk=card.deck.pk %}" class=" return-to-deck ml20 mt10 return-to-pile label-button {% include 'decks/includes/color_choice_background.html' %}">Keep Reviewing</a>
 </div>
 </div>
 

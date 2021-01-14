@@ -1,7 +1,19 @@
+{% if request.path == '/' %}
+<div class="search-form-div">
+  <form class='search-form' action="{% url 'home' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class='search-submit'>
+      <button class="button-function {% include 'decks/includes/color_choice_border.html' %}" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+{% endif %}
+
 <div>
   <div class='flex-col'>
     <div class='flex'>
-      <div class='flex question-button'>My Decks</div>
+      <div class="flex question-button {% include 'decks/includes/color_choice_border.html' %}">My Decks</div>
     </div>
     
       <ul class='flex animate__animated animate__fadeInRight'>
@@ -9,6 +21,8 @@
         {% if deck.user == request.user %}
         
         <li>
+          <div class="title-button {% include 'decks/includes/color_choice_background.html' %}">{{ deck.name }}</div>
+
           <div class='card-holder'>
           {% if deck.deck_cover_upload %}
           <a href="{% url 'deck-detail' deck_pk=deck.pk %}"><img class='flip-card' src="{{ deck.deck_cover_upload.url }}"></a>
@@ -25,7 +39,7 @@
       </ul>
       {% if request.path == '/' %}
       <div class='flex'>
-        <a class='label-button' href="{% url 'add-deck' %}">Add a Deck</a>
+        <a class="label-button {% include 'decks/includes/color_choice_background.html' %}" href="{% url 'add-deck' %}">Add a Deck</a>
       </div>
       {% endif %}
 
@@ -33,12 +47,13 @@
   {% if request.path == '/' %}
   <div class='public-decks flex-col'>
     <div class='flex'>
-      <div class='flex question-button'>Public Decks</div>
+      <div class="flex question-button {% include 'decks/includes/color_choice_border.html' %}">Public Decks</div>
     </div>
     <ul class='flex animate__animated animate__fadeInLeft'>
       {% for deck in decks %}
       {% if deck.user != request.user %}
       <li>
+        <div class="title-button {% include 'decks/includes/color_choice_background.html' %}">{{ deck.name }}</div>
         {% if deck.deck_cover_upload %}
         <a href="{% url 'deck-detail' deck_pk=deck.pk %}"><img class='flip-card' src="{{ deck.deck_cover_upload.url }}"></a>
         {% elif deck.deck_cover %}

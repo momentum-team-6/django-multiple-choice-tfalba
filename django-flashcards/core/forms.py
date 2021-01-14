@@ -23,3 +23,6 @@ class CardForm(forms.ModelForm):
     ]
 
 
+
+class SearchForm(forms.Form):
+  search_term = forms.CharField(label='Search Term', max_length=50, required=False)

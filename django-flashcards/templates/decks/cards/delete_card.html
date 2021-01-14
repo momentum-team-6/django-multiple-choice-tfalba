@@ -1,0 +1,17 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 style="margin-top:40px; padding:5px;">Delete Card</h2>
+<div class='form-div'>
+  <form action="{% url 'delete-card' pk=card.pk %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p><em>Are you sure you want to delete? </em></p>
+    <div>
+      <button type="submit">Delete Card</button><br />
+      <a href="{% url 'home' %}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -4,16 +4,18 @@
 
 {% block content %}
 
-<div class='flex-col bottom-section'>
+<div class='flex-col bottom-section mb50'>
   <div class='flex'>
-  <p class='search-heading question-button'>Search Actors to add to {{ deck.name }} </p>
+  <p class="search-heading question-button {% include 'decks/includes/color_choice_border.html' %}">Search Actors to add to {{ deck.name }} </p>
   </div>
   <form id="movie-form-3">
     <input class='actor-search mt10' type='text' placeholder='Enter Actor' id='actor-search'></input>
-    <button class='label-button' id="submit-button-3" type='Submit'>Submit</button> 
+    <button class="label-button {% include 'decks/includes/color_choice_background.html' %}" id="submit-button-3" type='Submit'>Submit</button> 
   </form>
 </div>
 
-<div id='display-2' data-deck-pk={{ deck.pk }}></div>
+<div id='display-2' class='mb20' data-deck-pk={{ deck.pk }}></div>
+
+{% include 'decks/includes/deck_detail_include.html' %}
 
 {% endblock %}
