@@ -15,10 +15,10 @@ def index(request):
     form = SearchForm(data=request.POST)
     if form.is_valid():
       my_search_term = form.cleaned_data['search_term']
-      decks = Deck.objects.filter(Q(cards__answer__icontains=my_search_term) | Q(name__icontains=my_search_term)).filter(Q(user=request.user) | Q(is_private=False))
+      decks = Deck.objects.filter(Q(cards__answer__icontains=my_search_term) | Q(name__icontains=my_search_term)).filter(Q(user=request.user) | Q(is_private=False)).distinct()
   else:
     form = SearchForm()
-    decks= Deck.objects.filter(Q(user=request.user) | Q(is_private=False))
+    decks= Deck.objects.filter(Q(user=request.user) | Q(is_private=False)).distinct()
   return render(request, 'decks/index.html', {"decks": decks, "form": form})
 
 @login_required
@@ -139,14 +139,6 @@ def change_color(request, user_pk, color_pk):
   user.color = color_pk
   user.save()
   data = {'change to': color_pk}
-  # if user.color == '3':
-  #   user.color = '2'
-  #   user.save()
-  #   data = {'change': 'to blue'}
-  # else:
-  #   user.color = '1'
-  #   user.save()
-  #   data = {'change': 'to mustard'}
   return JsonResponse(data)
 
 def edit_deck(request, deck_pk):
@@ -157,9 +149,7 @@ def edit_deck(request, deck_pk):
     
     form = DeckForm(request.POST, request.FILES, instance=deck)
     if form.is_valid():
-      
       form.save()
-     
       return redirect(to='deck-detail', deck_pk=deck_pk)
   else: 
     form = DeckForm(instance=deck)
